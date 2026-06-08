@@ -117,7 +117,7 @@ git pull origin main
 2. Once repository is downloaded, generate a ssh key pair <br />
 Example: 
 ```
-cd kyes
+cd keys
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 3. Copy below variable values and paste it in all.yml file, and update only the smtp variable values with your smtp values<br />
