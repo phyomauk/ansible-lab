@@ -120,8 +120,8 @@ Example:
 cd kyes
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-3. Create variable in group_vars folder <br />
-Example:
+3. Copy below variable values and paste it in all.yml file, and update only the smtp variable values with your smtp values<br />
+Variables:
 ```
 ansible_user: ansible
 ansible_ssh_private_key_file: "{{ playbook_dir }}/keys/ansible_key"
@@ -181,6 +181,5 @@ If the database container is stopped and restarted, the MySQL service must be st
 ```
 mysqld_safe &
 ```
-If you use gmail. Go to Google security settings to setup App Passwords
-https://myaccount.google.com/apppasswords
+
 
