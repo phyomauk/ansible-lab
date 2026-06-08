@@ -1,0 +1,15 @@
+[web_servers]
+web01 ansible_host=127.0.0.1 ansible_port=2221 
+web02 ansible_host=127.0.0.1 ansible_port=2229 
+
+[database_servers]
+db01 ansible_host=127.0.0.1 ansible_port=2223
+
+[load_balancers]
+lb01 ansible_host=127.0.0.1 ansible_port=2224
+
+[all_servers]
+web01
+web02
+db01
+lb01

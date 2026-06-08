@@ -1,0 +1,22 @@
+---
+# tasks file for webserver
+- name: Install Python Flask dependencies
+  apt: 
+    name: python3-flask
+    state: present
+  become: yes
+
+- name: Copy web-server code
+  copy: 
+    src : app.py 
+    dest : /opt/app.py
+
+- name: Start web-application
+  shell: |
+    cd /opt
+    nohup flask run --host=0.0.0.0 > /opt/flask.log 2>&1 &
+  environment:
+    FLASK_APP: app.py
+
+
+  

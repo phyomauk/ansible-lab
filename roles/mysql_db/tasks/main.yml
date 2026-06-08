@@ -1,0 +1,93 @@
+---
+# tasks file for mysql_db    
+- name: Install MySQL database
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+    state: present
+  become: yes
+
+- name: Ensure MySQL bind-address settings are present in /etc/mysql/my.cnf
+  blockinfile:
+    path: /etc/mysql/my.cnf
+    block: |
+      [mysqld]
+      bind-address = 0.0.0.0
+      mysqlx-bind-address = 0.0.0.0
+    create: yes
+  become: yes
+
+- name: Start MySQL service
+  shell: mysqld_safe &
+
+- name: Wait for MySQL to be ready
+  shell: |
+    until mysqladmin ping --silent; do
+      sleep 2
+    done
+  args:
+    executable: /bin/bash
+  become: yes
+
+- name: Create MariaDB admin user for Ansible
+  mysql_user:
+    name: "{{ db_admin_user }}"
+    password: "{{ db_admin_password }}"
+    host: "%"
+    priv: "*.*:ALL,GRANT"
+    state: present
+    login_user: root
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    column_case_sensitive: false
+  become: yes
+
+- name: Create database
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+    login_user: "{{ db_admin_user }}"
+    login_password: "{{ db_admin_password }}"
+  become: yes
+
+- name: Create DB user
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
+    host: "%"
+    state: present
+    login_user: "{{ db_admin_user }}"
+    login_password: "{{ db_admin_password }}"
+    column_case_sensitive: false
+  become: yes
+
+- name: Create employees table
+  mysql_query:
+    login_user: "{{ db_user }}"
+    login_password: "{{ db_password }}"
+    login_db: employee_db
+    query: |
+      CREATE TABLE IF NOT EXISTS employees (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100),
+        position VARCHAR(100),
+        salary INT
+      );
+  become: yes
+
+- name: Insert sample data
+  mysql_query:
+    login_user: "{{ db_user }}"
+    login_password: "{{ db_password }}"
+    login_db: employee_db
+    query: |
+      INSERT INTO employees (name, position, salary)
+      SELECT * FROM (SELECT 'Alice', 'Engineer', 90000) AS tmp
+      WHERE NOT EXISTS (
+        SELECT 1 FROM employees WHERE name='Alice'
+      );
+  become: yes
+
+
+

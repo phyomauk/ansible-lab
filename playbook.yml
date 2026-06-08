@@ -1,0 +1,65 @@
+- 
+  name: Deploy a mysql DB
+  hosts: database_servers
+  become: yes
+  roles: 
+    - python
+    - mysql_db
+
+- 
+  name: Deploy two web servers
+  hosts: web_servers
+  become: yes
+  roles: 
+    - python
+    - webserver
+
+- 
+  name: Deploy a load balancer
+  hosts: load_balancers
+  become: yes
+  roles: 
+    - lb
+
+# -------------------------------
+# FINAL NOTIFICATION
+# -------------------------------
+- name: Send deployment notification
+  hosts: localhost
+  gather_facts: no
+  run_once: true
+
+  tasks:
+    - name: Check if any host failed
+      set_fact:
+        deployment_failed: "{{ true }}"
+      when: >
+        (
+          (hostvars | dict2items |
+            selectattr('value.ansible_failed_result','defined') |
+            list | length) > 0
+        )
+
+    - name: Send FAILURE email if any play failed
+      community.general.mail:
+        host: "{{ smtp_host }}"
+        port: "{{ smtp_port }}"
+        secure: starttls
+        username: "{{ smtp_user }}"
+        password: "{{ smtp_pass }}"
+        to: "{{ smtp_receiver }}"
+        subject: "❌ Ansible Deployment FAILED"
+        body: "One or more plays failed during the deployment."
+      when: deployment_failed | default(false)
+
+    - name: Send SUCCESS email if all plays succeeded
+      community.general.mail:
+        host: "{{ smtp_host }}"
+        port: "{{ smtp_port }}"
+        secure: starttls
+        username: "{{ smtp_user }}"
+        password: "{{ smtp_pass }}"
+        to: "{{ smtp_receiver }}"
+        subject: "✅ Ansible Deployment SUCCESS"
+        body: "All plays completed successfully."
+      when: not (deployment_failed | default(false))

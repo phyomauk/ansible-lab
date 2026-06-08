@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  web1:
+    build: .
+    container_name: flask_web01
+    hostname: web01
+    networks:
+      ansible-net:
+        ipv4_address: 10.10.10.11
+    ports:
+      - "5000:5000"   # Flask
+      - "2221:22" # ssh ansible
+    restart: unless-stopped
+    depends_on:
+      - database
+
+  web2:
+    build: .
+    container_name: flask_web02
+    hostname: web02
+    networks:
+      ansible-net:
+        ipv4_address: 10.10.10.12
+    ports:
+      - "5001:5000"   # Flask
+      - "2229:22" # ssh ansible 
+    restart: unless-stopped
+    depends_on:
+      - database
+
+  database:
+    build: .
+    container_name: MySQL
+    hostname: db01
+    networks:
+      ansible-net:
+        ipv4_address: 10.10.10.20
+    ports:
+      - "3306:3306"   # MariaDB
+      - "2223:22" # ssh ansible
+    restart: unless-stopped
+
+  loadbalancer:
+    build: .
+    container_name: loadbalancer
+    hostname: lb01
+    networks:
+      ansible-net:
+        ipv4_address: 10.10.10.30
+    ports:
+      - "8080:80"   # Entry point to your LB
+      - "2224:22" # ssh ansible
+    restart: unless-stopped
+
+networks:
+  ansible-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.10.0/24
