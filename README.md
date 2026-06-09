@@ -28,7 +28,7 @@ ansible-lab/
 ├── docker-compose.yml
 ├── Dockerfile
 ├── inventory.txt
-├── playbook.yaml
+├── playbook.yml
 ├── group_vars/
 │   └── all.yml
 ├── keys
@@ -159,16 +159,13 @@ Once the app is running, verify that the Flask web app is responding and able to
 
 Open your browser and navigate to:
 1. localhost:8080
-  - Response: 
-    - Welcome! Response from node01/node02
+  - Response: Welcome! Response from node01/node02
 
 2. localhost:8080/how are you
-  - Response: 
-     - I am good, how about you? Response from node01/node02
+  - Response: I am good, how about you? Response from node01/node02
 
 3. localhost:8080/employees
-  - Response: 
-     {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"}
+  - Response: {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"}
 
 
 # Removing Containers
@@ -178,7 +175,7 @@ docker compose down
 ``` 
 
 # Note 
-If the database container is stopped and restarted, the MySQL service must be started manually inside of the database container. There is no auto-start mechanism implemented for the MySQL service.  
+If the database container is stopped and restarted, the MySQL service must be started manually inside of the database container. There is no auto-start mechanism implemented for the MySQL service. The following command is the way to start the MySQL service.   
 ```
 mysqld_safe &
 ```
