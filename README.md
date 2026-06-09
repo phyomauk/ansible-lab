@@ -21,27 +21,6 @@ flowchart TD
     WEB1 --> DB
     WEB2 --> DB
 ```
-
-# Prerequisites
-Before running this lab, ensure the following tools are installed on your system:
-
-- **Docker** (version 20+ recommended)
-- **Docker Compose** (v2+)
-- **Ansible** (version 2.10+)
-- **Git** (optional, for cloning the repository)
-- **Python 3** (for Ansible and local tooling)
-
-You can verify installation with:
-```
-docker --version
-docker compose version
-ansible --version 
-```
-If you like to receive an email notification after running the playbook, you have to get your App Password from your email provider. Below is the link to setup your gmail App Password. 
-```
-https://myaccount.google.com/apppasswords 
-```
-
 # Directory Structure
 Below is the recommended structure of this project: 
 ```
@@ -88,7 +67,6 @@ Four Ansible roles are included in this project, located in the roles directory.
 mysql_db role
 - Installs MySQL, configures the database server, and inserts a sample record.
 - Tasks: roles/mysql_db/tasks
-- Variables: roles/mysql_db/vars
 
 webserver role
 - Configures the web servers.
@@ -104,6 +82,28 @@ lb role
 - Tasks: roles/lb/tasks
 - NGINX template: roles/lb/templates
 
+# Prerequisites
+Before running this lab, ensure the following tools are installed on your system:
+
+- **Docker** (version 20+ recommended)
+- **Docker Compose** (v2+)
+- **Ansible** (version 2.10+)
+- **Git** (optional, for cloning the repository)
+- **Python 3** (for Ansible and local tooling)
+
+You can verify installation with:
+```
+docker --version
+docker compose version
+ansible --version 
+```
+# Email notification
+Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file group_vars folder. You can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
+ 
+```
+https://myaccount.google.com/apppasswords 
+```
+You should be able to run the playbook without including App Password of your email. 
 # How to run this lab.
 
 1. pull the repository <br />
@@ -120,7 +120,7 @@ Example:
 cd keys
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-3. Copy below variable values and paste it in all.yml file, and update only the smtp variable values with your smtp values<br />
+3. Copy below variable values and paste it in all.yml file inside of group_vars folder, and update only the smtp variable values with your smtp values<br />
 Variables:
 ```
 ansible_user: ansible
@@ -134,6 +134,7 @@ db_name: employee_db
 db_user: db_user
 db_password: Passw0rd
 
+# example and optional
 smtp_host: "smtp.gmail.com"
 smtp_port: 587
 smtp_user: "your_name@gmail.com"
