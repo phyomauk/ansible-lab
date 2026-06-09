@@ -103,7 +103,7 @@ Email notificaion play is included in the playbook to notify you wheather playbo
 ```
 https://myaccount.google.com/apppasswords 
 ```
-You should be able to run the playbook without including App Password of your email. 
+You should be able to run the playbook without including your SMTP info and the App Password. 
 # How to run this lab.
 
 1. pull the repository <br />
@@ -114,7 +114,7 @@ git remote add origin https://github.com/phyomauk/ansible-lab.git
 git pull origin main
 ```
 
-2. Once repository is downloaded, generate a ssh key pair <br />
+2. Once repository is downloaded, generate a ssh key pair in keys folder<br />
 Example: 
 ```
 cd keys
@@ -188,5 +188,5 @@ If the database container is stopped and restarted, the MySQL service must be st
 ```
 mysqld_safe &
 ```
-
+Thank you for visting to my repo. 
 
