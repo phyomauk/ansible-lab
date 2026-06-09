@@ -1,9 +1,26 @@
 # About Ansible-lab (Configuring Flask Web App) 
-This lab uses four Ubuntu containers, each acting as a lightweight virtual machine.  
-Two containers function as web servers, while the remaining two serve as a MySQL database server and a load balancer.
+This lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services.
 
-Containers are used to minimize resource requirements, and they can be created or destroyed quickly as needed.  
-The goal of this lab is to demonstrate how Ansible works, rather than to develop a full production application.  
+Ubuntu container images were intentionally selected instead of prebuilt MySQL or Nginx images to demonstrate infrastructure configuration and service deployment through Ansible automation. This approach highlights configuration management, software provisioning, and orchestration practices commonly used in cloud and DevOps environments, rather than relying on vendor-preconfigured application containers.
+
+Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
+
+# Architecture Diagram
+
+```mermaid
+flowchart TD
+    USER[Web Traffic Request]
+    LB[Ubuntu + NGINX LB]
+    WEB1[Ubuntu Web1]
+    WEB2[Ubuntu Web2]
+    DB[Ubuntu + MySQL]
+    
+    USER --> LB
+    LB --> WEB1
+    LB --> WEB2
+    WEB1 --> DB
+    WEB2 --> DB
+```
 
 # Prerequisites
 Before running this lab, ensure the following tools are installed on your system:
@@ -23,23 +40,6 @@ ansible --version
 If you like to receive an email notification after running the playbook, you have to get your App Password from your email provider. Below is the link to setup your gmail App Password. 
 ```
 https://myaccount.google.com/apppasswords 
-```
-
-# Architecture Diagram
-
-```mermaid
-flowchart TD
-    USER[Web Traffic Request]
-    LB[Ubuntu + NGINX LB]
-    WEB1[Ubuntu Web1]
-    WEB2[Ubuntu Web2]
-    DB[Ubuntu + MySQL]
-    
-    USER --> LB
-    LB --> WEB1
-    LB --> WEB2
-    WEB1 --> DB
-    WEB2 --> DB
 ```
 
 # Directory Structure
@@ -104,7 +104,7 @@ lb role
 - Tasks: roles/lb/tasks
 - NGINX template: roles/lb/templates
 
-## Running the lab.
+# How to run this lab.
 
 1. pull the repository <br />
 Example:  
