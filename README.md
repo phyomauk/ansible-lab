@@ -158,13 +158,22 @@ Ansible will configure the web servers, the database, and the load balancer on t
 Once the app is running, verify that the Flask web app is responding and able to query the database.
 
 Open your browser and navigate to:
-1. localhost:8080
+1. 
+```
+localhost:8080
+```
   - Response: Welcome! Response from node01/node02
 
-2. localhost:8080/how are you
+2. 
+```
+localhost:8080/how are you
+```
   - Response: I am good, how about you? Response from node01/node02
 
-3. localhost:8080/employees
+3. 
+```
+localhost:8080/employees
+```
   - Response: {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"}
 
 
