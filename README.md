@@ -105,7 +105,8 @@ docker compose version
 ansible --version 
 ```
 # Email notification
-Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file group_vars folder. You can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
+(Optional)
+Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file group_vars folder. If you haven't set up your App Passowrd then, you can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
  
 ```
 https://myaccount.google.com/apppasswords 
