@@ -9,7 +9,7 @@ This lab is designed to run in local system rather than running in the cloud env
 
 # Architecture Diagram
 
-```
+```mermaid
 flowchart LR
     ANSIBLE[Ansible Controller]
 
