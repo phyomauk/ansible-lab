@@ -1,5 +1,5 @@
 # About Ansible-lab (Configuring Flask Web App) 
-This lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services.
+This lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
 
 Ubuntu container images were intentionally selected instead of prebuilt MySQL or Nginx images to demonstrate infrastructure configuration and service deployment through Ansible automation. This approach highlights configuration management, software provisioning, and orchestration practices commonly used in cloud and DevOps environments, rather than relying on vendor-preconfigured application containers.
 
@@ -7,7 +7,7 @@ Containers were chosen to reduce system resource consumption, improve deployment
 
 This lab is designed to run in local system rather than running in the cloud environment. 
 
-# Architecture Diagram
+# Application Architecture Diagram
 
 ```mermaid
 flowchart TD
@@ -16,12 +16,18 @@ flowchart TD
     WEB1[Ubuntu Web1]
     WEB2[Ubuntu Web2]
     DB[Ubuntu + MySQL]
-    
+    ANSIBLE[Ansible Controller]
+
     USER --> LB
     LB --> WEB1
     LB --> WEB2
     WEB1 --> DB
     WEB2 --> DB
+
+    ANSIBLE -.-> LB
+    ANSIBLE -.-> WEB1
+    ANSIBLE -.-> WEB2
+    ANSIBLE -.-> DB
 ```
 # Directory Structure
 Below is the recommended structure of this project: 
@@ -83,6 +89,9 @@ lb role
 - Installs NGINX and configures it as a load balancer.
 - Tasks: roles/lb/tasks
 - NGINX template: roles/lb/templates
+
+# The inventory file
+To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed as group_vars variables.  
 
 # The playbook
 The main playbook will execute the following in order
