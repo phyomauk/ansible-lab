@@ -108,7 +108,7 @@ ansible --version
 ```
 # Email notification
 (Optional)
-Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file group_vars folder. If you haven't set up your App Passowrd then, you can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
+Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file inside of group_vars folder. If you haven't set up your App Passowrd then, you can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
  
 ```
 https://myaccount.google.com/apppasswords 
@@ -201,6 +201,7 @@ If the database container is stopped and restarted, the MySQL service must be st
 ```
 mysqld_safe &
 ```
-Thank you for visting to my repo. 
-Author: Phyo Mauk
+Thank you for visting to my repo.<br /> 
+Author: Phyo Mauk<br />
+Year: 2026
 
