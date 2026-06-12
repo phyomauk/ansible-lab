@@ -8,6 +8,7 @@ Containers were chosen to reduce system resource consumption, improve deployment
 This lab is designed to run in local system rather than running in the cloud environment. 
 
 # Architecture Diagram
+
 ```
 flowchart LR
     ANSIBLE[Ansible Controller]
