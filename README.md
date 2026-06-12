@@ -9,26 +9,29 @@ This lab is designed to run in local system rather than running in the cloud env
 
 # Application Architecture Diagram
 
-```mermaid
-flowchart TD
-    USER[Web Traffic Request]
-    LB[Ubuntu + NGINX LB]
-    WEB1[Ubuntu Web1]
-    WEB2[Ubuntu Web2]
-    DB[Ubuntu + MySQL]
+flowchart LR
     ANSIBLE[Ansible Controller]
 
-    USER --> LB
-    LB --> WEB1
-    LB --> WEB2
-    WEB1 --> DB
-    WEB2 --> DB
+    subgraph App Stack
+        USER[Web Traffic Request]
+        LB[Ubuntu + NGINX LB]
+        WEB1[Ubuntu Web1]
+        WEB2[Ubuntu Web2]
+        DB[Ubuntu + MySQL]
+
+        USER --> LB
+        LB --> WEB1
+        LB --> WEB2
+        WEB1 --> DB
+        WEB2 --> DB
+    end
 
     ANSIBLE -.-> LB
     ANSIBLE -.-> WEB1
     ANSIBLE -.-> WEB2
     ANSIBLE -.-> DB
 ```
+
 # Directory Structure
 Below is the recommended structure of this project: 
 ```
