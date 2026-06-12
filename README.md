@@ -1,11 +1,14 @@
 # About Ansible-lab (Configuring Flask Web App) 
+This lab demonstrates how Ansible configure systems, deploy software and orchestrate advanced workflows.  
+
+# Lab Design 
 This lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
 
 Ubuntu container images were intentionally selected instead of prebuilt MySQL or Nginx images to demonstrate infrastructure configuration and service deployment through Ansible automation. This approach highlights configuration management, software provisioning, and orchestration practices commonly used in cloud and DevOps environments, rather than relying on vendor-preconfigured application containers.
 
 Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
-
-This lab is designed to run in local system rather than running in the cloud environment. 
+ 
+This lab is designed to run in local system rather than running in the cloud environment.
 
 # Architecture Diagram
 
@@ -98,7 +101,7 @@ All required infrastructure is provisioned using Docker.
 
 The Dockerfile defines the base image for each container.
 
-docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network ansible-net with the CIDR block 10.10.10.0/24.
+docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network "ansible-net" with the CIDR block 10.10.10.0/24.
 
 # Roles 
 Four Ansible roles are included in this project, located in the roles directory.
@@ -154,6 +157,8 @@ Email notificaion play is included in the playbook to notify you wheather playbo
 https://myaccount.google.com/apppasswords 
 ```
 You should be able to run the playbook without including your SMTP info and the App Password. 
+
+# Running the lab
 
 # How to run this lab.
 
