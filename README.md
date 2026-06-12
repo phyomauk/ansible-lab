@@ -5,6 +5,8 @@ Ubuntu container images were intentionally selected instead of prebuilt MySQL or
 
 Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
 
+This lab is designed to run in local system rather than running in the cloud environment. 
+
 # Architecture Diagram
 
 ```mermaid
@@ -129,6 +131,8 @@ Example:
 cd keys
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
+Explanation: Public key will be baked into image during container creation and Ansbile will use a private key to connect to containers. 
+
 3. Copy below variable values and paste it in all.yml file inside of group_vars folder, and update only the smtp variable values with your smtp values<br />
 Variables:
 ```
@@ -198,4 +202,5 @@ If the database container is stopped and restarted, the MySQL service must be st
 mysqld_safe &
 ```
 Thank you for visting to my repo. 
+Author: Phyo Mauk
 
