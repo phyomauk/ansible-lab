@@ -11,26 +11,53 @@ This lab is designed to run in local system rather than running in the cloud env
 
 ```mermaid
 flowchart LR
-    ANSIBLE[Ansible Controller]
+    %% Nodes
+    ANSIBLE[🎛️ Ansible Controller]
 
-    subgraph App Stack
-        USER[Web Traffic Request]
-        LB[Ubuntu + NGINX LB]
-        WEB1[Ubuntu Web1]
-        WEB2[Ubuntu Web2]
-        DB[Ubuntu + MySQL]
+    subgraph APP[Application Stack]
+        direction LR
 
-        USER --> LB
-        LB --> WEB1
-        LB --> WEB2
-        WEB1 --> DB
-        WEB2 --> DB
+        USER[🌐 Client Request]
+
+        subgraph LB_TIER[Load Balancer Tier]
+            LB[NGINX Load Balancer]
+        end
+
+        subgraph WEB_TIER[Web Tier]
+            WEB1[Web Server 1]
+            WEB2[Web Server 2]
+        end
+
+        subgraph DB_TIER[Database Tier]
+            DB["(MySQL Database)"]
+        end
     end
 
-    ANSIBLE -.-> LB
+    %% Traffic Flow (solid)
+    USER -->|HTTP/HTTPS| LB
+    LB --> WEB1
+    LB --> WEB2
+    WEB1 -->|SQL| DB
+    WEB2 -->|SQL| DB
+
+    %% Ansible Control Plane (dashed)
+    ANSIBLE -. SSH / Playbooks .-> LB
     ANSIBLE -.-> WEB1
     ANSIBLE -.-> WEB2
     ANSIBLE -.-> DB
+
+    %% Styling
+    classDef controller fill:#1f77b4,color:#fff,stroke:#0d3b66
+    classDef lb fill:#ff7f0e,color:#fff
+    classDef web fill:#2ca02c,color:#fff
+    classDef db fill:#9467bd,color:#fff
+    classDef user fill:#7f7f7f,color:#fff
+
+    class ANSIBLE controller
+    class LB lb
+    class WEB1,WEB2 web
+    class DB db
+    class USER user
 ```
 
 # Directory Structure
