@@ -159,9 +159,9 @@ https://myaccount.google.com/apppasswords
 You should be able to run the playbook without including your SMTP info and the App Password. 
 
 # Running the lab
+You should be able to run this lab on your local system, virtual machines or GitHub Codespace. 
 
 # How to run this lab.
-
 1. pull the repository <br />
 Example:  
 ```
@@ -170,7 +170,7 @@ git remote add origin https://github.com/phyomauk/ansible-lab.git
 git pull origin main
 ```
 
-2. Once repository is downloaded, generate a ssh key pair in keys folder<br />
+2. Once repository is downloaded, generate a ssh key pair in "keys" folder<br />
 Example: 
 ```
 cd keys
