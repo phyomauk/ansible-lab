@@ -82,6 +82,13 @@ lb role
 - Tasks: roles/lb/tasks
 - NGINX template: roles/lb/templates
 
+# The playbook
+The main playbook will execute the following in order
+- deploy a MySQL server
+- deploy two flask web app servers
+- deploy a nginx load balancer 
+- send an email notification about deployment status 
+
 # Prerequisites
 Before running this lab, ensure the following tools are installed on your system:
 
@@ -104,6 +111,7 @@ Email notificaion play is included in the playbook to notify you wheather playbo
 https://myaccount.google.com/apppasswords 
 ```
 You should be able to run the playbook without including your SMTP info and the App Password. 
+
 # How to run this lab.
 
 1. pull the repository <br />
