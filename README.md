@@ -99,9 +99,9 @@ ansible-lab/
 # Container Creation
 All required infrastructure is provisioned using Docker.
 
-The Dockerfile defines the base image for each container.
+Only one Dockerfile is included and it is the base image for each container.
 
-docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network "ansible-net" with the CIDR block 10.10.10.0/24.
+The docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network "ansible-net" with the CIDR block 10.10.10.0/24.
 
 # Roles 
 Four Ansible roles are included in this project, located in the roles directory.
@@ -111,7 +111,7 @@ mysql_db role
 - Tasks: roles/mysql_db/tasks
 
 webserver role
-- Configures the web servers.
+- Configures the web servers, and seeds the flask app. 
 - Tasks: roles/webserver/tasks
 - Flask application files: roles/webserver/files
 
@@ -125,10 +125,10 @@ lb role
 - NGINX template: roles/lb/templates
 
 # The inventory file
-To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed as group_vars variables.  
+To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed in the group_vars variables.  
 
 # The playbook
-The main playbook will execute the following in order
+The main playbook will execute the followings in order
 - deploy a MySQL server
 - deploy two flask web app servers
 - deploy a nginx load balancer 
@@ -159,7 +159,7 @@ https://myaccount.google.com/apppasswords
 You should be able to run the playbook without including your SMTP info and the App Password. 
 
 # Running the lab
-You should be able to run this lab on your local system, virtual machines or GitHub Codespace. 
+Runnning this lab on your local system is recommended. It should also work on virtual machines or GitHub Codespace. 
 
 # How to run this lab.
 1. pull the repository <br />
@@ -213,7 +213,7 @@ ansible-playbook -i inventory.txt playbook.yaml
 Ansible will configure the web servers, the database, and the load balancer on their respective containers.  
 
 # Testing the App
-Once the app is running, verify that the Flask web app is responding and able to query the database.
+Once the app is up and running, verify that the Flask web app is responding and able to query the database.
 
 Open your browser and navigate to:<br />
 1. 
