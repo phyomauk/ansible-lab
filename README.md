@@ -135,7 +135,7 @@ The main playbook will execute the followings in order
 - send an email notification about deployment status 
 
 # Ansible Credentials
-- the ansible controller(host machine) will use user name and a private key to connect to the containers. 
+- The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be backed into the container image, so ssh key pair generation is required before the container creation. Please view detials steps in "How to run this lab" section below. 
 
 # Prerequisites
 Before running this lab, ensure the following tools are installed on your system:
