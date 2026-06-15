@@ -2,13 +2,13 @@
 This lab demonstrates how Ansible configure systems, deploy software and orchestrate advanced workflows.  
 
 # Lab Design 
-This lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
+This lab is designed to run in local system rather than running in the cloud environment. 
+
+The lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
 
 Ubuntu container images were intentionally selected instead of prebuilt MySQL or Nginx images to demonstrate infrastructure configuration and service deployment through Ansible automation. This approach highlights configuration management, software provisioning, and orchestration practices commonly used in cloud and DevOps environments, rather than relying on vendor-preconfigured application containers.
 
 Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
- 
-This lab is designed to run in local system rather than running in the cloud environment.
 
 # Architecture Diagram
 
@@ -133,6 +133,9 @@ The main playbook will execute the followings in order
 - deploy two flask web app servers
 - deploy a nginx load balancer 
 - send an email notification about deployment status 
+
+# Ansible Credentials
+- the ansible controller(host machine) will use user name and a private key to connect to the containers. 
 
 # Prerequisites
 Before running this lab, ensure the following tools are installed on your system:
