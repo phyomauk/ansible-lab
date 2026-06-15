@@ -159,7 +159,7 @@ https://myaccount.google.com/apppasswords
 You should be able to run the playbook without including your SMTP info and the App Password. 
 
 # Running the lab
-Runnning this lab on your local system is recommended. It should also work on virtual machines or GitHub Codespace. 
+Runnning this lab on local system is recommended. It should also work on virtual machines or GitHub Codespace. 
 
 # How to run this lab.
 1. pull the repository <br />
