@@ -178,6 +178,7 @@ Example:
 ```
 cd keys
 ssh-keygen -t ed25519 -C "your_email@example.com"
+chmod 600 your_private_key your_public_key.pub
 ```
 Explanation: Public key will be baked into image during container creation and Ansbile will use a private key to connect to containers. 
 
