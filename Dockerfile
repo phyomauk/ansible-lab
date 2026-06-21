@@ -16,7 +16,7 @@ RUN apt-get update && \
     chown ansible:ansible /home/ansible/.ssh
 
 # Copy your SSH public key into the image
-COPY keys/ansible_key.pub /home/ansible/.ssh/authorized_keys
+COPY keys/*.pub /home/ansible/.ssh/authorized_keys
 
 RUN chmod 700 /home/ansible/.ssh && \
     chmod 600 /home/ansible/.ssh/authorized_keys && \
