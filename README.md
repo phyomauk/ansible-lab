@@ -71,6 +71,123 @@ Ubuntu container images were intentionally selected instead of prebuilt MySQL or
 
 Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
 
+
+## 🧰 Tech Stack
+
+This project demonstrates hands-on experience with modern DevOps tooling and infrastructure automation practices.
+
+### Core Technologies
+- **Ansible** – Configuration management, orchestration, idempotent automation
+- **Docker** – Containerized infrastructure for reproducible lab environments
+- **Docker Compose** – Multi-container orchestration and service definition
+- **NGINX** – Load balancing and reverse proxy configuration
+- **MySQL** – Database provisioning and service automation
+
+### DevOps & Engineering Concepts
+- Infrastructure as Code (IaC)
+- Configuration Management
+- Multi-tier application architecture
+- Agentless automation (SSH-based Ansible)
+- YAML-based declarative configuration
+- Role-based automation design
+- Repeatable and version-controlled environments
+
+## ⚙️ Key Features / Capabilities
+
+- ✅ Fully automated provisioning of a 3-tier architecture
+- ✅ End-to-end infrastructure configuration using Ansible playbooks
+- ✅ Load-balanced web tier using NGINX
+- ✅ Scalable web layer with multiple servers
+- ✅ Database layer automation (MySQL setup and configuration)
+- ✅ Container-based lab environment for portability and isolation
+- ✅ Idempotent execution ensures consistent system states
+- ✅ Separation of infrastructure (Docker) and configuration (Ansible)
+- ✅ Realistic simulation of production-style deployment workflows
+
+## 🔁 Workflow (Automation Pipeline)
+
+Code Repository
+    ↓
+Ansible Controller
+    ↓
+Provision Docker Containers
+    ↓
+Configure NGINX (Load Balancer)
+    ↓
+Deploy Web Servers
+    ↓
+Initialize MySQL Database
+    ↓
+Validate End-to-End Connectivity
+
+## 🧩 Details Explanation Of The Project Components 
+### 📦 Container Creation
+All required infrastructure is provisioned using Docker.
+
+Only one Dockerfile is included and it is the base image for each container.
+
+The docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network "ansible-net" with the CIDR block 10.10.10.0/24.
+
+### 👷‍♂️ Roles 
+Four Ansible roles are included in this project, located in the roles directory.
+
+**mysql_db role**
+- Installs MySQL, configures the database server, and inserts a sample record.
+- Tasks: roles/mysql_db/tasks
+
+**webserver role**
+- Configures the web servers, and seeds the flask app. 
+- Tasks: roles/webserver/tasks
+- Flask application files: roles/webserver/files
+
+**python role**
+- Installs Python dependencies for both the web and database containers.
+- Tasks: roles/python/tasks
+
+**lb role**
+- Installs NGINX and configures it as a load balancer.
+- Tasks: roles/lb/tasks
+- NGINX template: roles/lb/templates
+
+### 🗃️ The inventory file
+To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed in the group_vars variables.  
+
+## 📕 The playbook
+The main playbook will execute the followings in order
+- deploy a MySQL server
+- deploy two flask web app servers
+- deploy a nginx load balancer 
+- send an email notification about deployment status 
+
+## 🔡 Ansible Credentials
+- The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be baked into the container image, so ssh key pair generation is required before the container creation step. Please view detials steps in "How to run this lab" section below. 
+
+# ☝️ How To Run This Lab 🔬
+Runnning this lab on local system is recommended. It should also work on virtual machines or GitHub Codespace. 
+
+## ✅ Prerequisites
+Before running this lab, ensure the following tools are installed on your system:
+
+- **Docker** (version 20+ recommended)
+- **Docker Compose** (v2+)
+- **Ansible** (version 2.10+)
+- **Git** (optional, for cloning the repository)
+- **Python 3** (for Ansible and local tooling)
+
+You can verify installation with:
+```
+docker --version
+docker compose version
+ansible --version 
+```
+### 📌 Email notification (Optional)
+Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file inside of group_vars folder. If you haven't set up your App Passowrd then, you can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
+ 
+```
+https://myaccount.google.com/apppasswords 
+```
+You should be able to run the playbook without including your SMTP info and the App Password. 
+
 ## 📁 Directory Structure
 Below is the recommended structure of this project: 
 ```
@@ -103,74 +220,6 @@ ansible-lab/
 │           └── nginx.conf.j2
 └── README.md
 ```
-
-## 📦 Container Creation
-All required infrastructure is provisioned using Docker.
-
-Only one Dockerfile is included and it is the base image for each container.
-
-The docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network "ansible-net" with the CIDR block 10.10.10.0/24.
-
-## 👷‍♂️ Roles 
-Four Ansible roles are included in this project, located in the roles directory.
-
-**mysql_db role**
-- Installs MySQL, configures the database server, and inserts a sample record.
-- Tasks: roles/mysql_db/tasks
-
-**webserver role**
-- Configures the web servers, and seeds the flask app. 
-- Tasks: roles/webserver/tasks
-- Flask application files: roles/webserver/files
-
-**python role**
-- Installs Python dependencies for both the web and database containers.
-- Tasks: roles/python/tasks
-
-**lb role**
-- Installs NGINX and configures it as a load balancer.
-- Tasks: roles/lb/tasks
-- NGINX template: roles/lb/templates
-
-## 🗃️ The inventory file
-To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed in the group_vars variables.  
-
-## 📕 The playbook
-The main playbook will execute the followings in order
-- deploy a MySQL server
-- deploy two flask web app servers
-- deploy a nginx load balancer 
-- send an email notification about deployment status 
-
-## 🔡 Ansible Credentials
-- The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be baked into the container image, so ssh key pair generation is required before the container creation step. Please view detials steps in "How to run this lab" section below. 
-
-# ☝️ How To Run this lab 🔬
-Runnning this lab on local system is recommended. It should also work on virtual machines or GitHub Codespace. 
-
-## ✅ Prerequisites
-Before running this lab, ensure the following tools are installed on your system:
-
-- **Docker** (version 20+ recommended)
-- **Docker Compose** (v2+)
-- **Ansible** (version 2.10+)
-- **Git** (optional, for cloning the repository)
-- **Python 3** (for Ansible and local tooling)
-
-You can verify installation with:
-```
-docker --version
-docker compose version
-ansible --version 
-```
-### 📌 Email notification (Optional)
-Email notificaion play is included in the playbook to notify you wheather playbook is failed or successed. If you like to receive an email notification, please include the App Password of your email in all.yml file inside of group_vars folder. If you haven't set up your App Passowrd then, you can get the App Password from your email provider. As an example, below is the link to setup your gmail App Password. 
- 
-```
-https://myaccount.google.com/apppasswords 
-```
-You should be able to run the playbook without including your SMTP info and the App Password. 
-
 
 ## Running the lab.
 - Follow instruction below
