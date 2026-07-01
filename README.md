@@ -1,4 +1,6 @@
-# 📖 About Ansible-lab (Configuring Flask Web App) 
+# 🚀 Ansible-lab (Configuring Flask Web App)
+
+## 📖  Project overview 
 This lab demonstrates how Ansible configure systems, deploy software and orchestrate advanced workflows.  
 
 # 📐 Lab Design 
