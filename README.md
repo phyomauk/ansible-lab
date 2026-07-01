@@ -1,18 +1,18 @@
-# 🚀 Ansible-lab (Configuring Flask Web App)
+# 🚀 Ansible Lab – Infrastructure Automation with Docker (3-Tier Architecture)
 
-## 📖  Project overview 
-This lab demonstrates how Ansible configure systems, deploy software and orchestrate advanced workflows.  
+## 📖  Executive Summar
+This project demonstrates how **Infrastructure as Code (IaC)** and **configuration automation** can be used to provision and manage a complete **3-tier application stack** (Load Balancer, Web Servers, and Database) using Ansible and Docker.
 
-# 📐 Lab Design 
-This lab is designed to run in local system rather than running in the cloud environment. 
 
-The lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
+👉 Business Value:
+- Eliminates manual server configuration
+- Enables repeatable and consistent deployments
+- Reduces time-to-deploy and operational errors
+- Simulates real-world production automation workflows
 
-Ubuntu container images were intentionally selected instead of prebuilt MySQL or Nginx images to demonstrate infrastructure configuration and service deployment through Ansible automation. This approach highlights configuration management, software provisioning, and orchestration practices commonly used in cloud and DevOps environments, rather than relying on vendor-preconfigured application containers.
+---
 
-Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
-
-# 🏗️ Architecture Diagram
+## 🏗️ Architecture Diagram
 
 ```mermaid
 flowchart LR
@@ -63,7 +63,16 @@ flowchart LR
 
 ```
 
-# 📁 Directory Structure
+## 📐 Lab Design 
+This lab is designed to run in local system rather than running in the cloud environment. 
+
+The lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
+
+Ubuntu container images were intentionally selected instead of prebuilt MySQL or Nginx images to demonstrate infrastructure configuration and service deployment through Ansible automation. This approach highlights configuration management, software provisioning, and orchestration practices commonly used in cloud and DevOps environments, rather than relying on vendor-preconfigured application containers.
+
+Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
+
+## 📁 Directory Structure
 Below is the recommended structure of this project: 
 ```
 ansible-lab/
@@ -96,14 +105,14 @@ ansible-lab/
 └── README.md
 ```
 
-# 📦 Container Creation
+## 📦 Container Creation
 All required infrastructure is provisioned using Docker.
 
 Only one Dockerfile is included and it is the base image for each container.
 
 The docker-compose.yml creates four containers from the Dockerfile, assigns static IP addresses, and creates the Docker network "ansible-net" with the CIDR block 10.10.10.0/24.
 
-# 👷‍♂️ Roles 
+## 👷‍♂️ Roles 
 Four Ansible roles are included in this project, located in the roles directory.
 
 **mysql_db role**
@@ -124,17 +133,17 @@ Four Ansible roles are included in this project, located in the roles directory.
 - Tasks: roles/lb/tasks
 - NGINX template: roles/lb/templates
 
-# 🗃️ The inventory file
+## 🗃️ The inventory file
 To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed in the group_vars variables.  
 
-# 📕 The playbook
+## 📕 The playbook
 The main playbook will execute the followings in order
 - deploy a MySQL server
 - deploy two flask web app servers
 - deploy a nginx load balancer 
 - send an email notification about deployment status 
 
-# 🔡 Ansible Credentials
+## 🔡 Ansible Credentials
 - The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be baked into the container image, so ssh key pair generation is required before the container creation step. Please view detials steps in "How to run this lab" section below. 
 
 # ☝️ How To Run this lab 🔬
