@@ -1,6 +1,6 @@
 # 🚀 Ansible Lab – Infrastructure Automation with Docker (3-Tier Architecture)
 
-## 📖  Executive Summar
+## 📖  Executive Summary
 This project demonstrates how **Infrastructure as Code (IaC)** and **configuration automation** can be used to provision and manage a complete **3-tier application stack** (Load Balancer, Web Servers, and Database) using Ansible and Docker.
 
 
