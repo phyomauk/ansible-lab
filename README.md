@@ -63,7 +63,7 @@ flowchart LR
 
 ```
 
-## 📐 Lab Design 
+## 📐 Infrastructure & Design 
 
 The lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
 
