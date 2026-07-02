@@ -63,7 +63,7 @@ flowchart LR
 
 ```
 
-## 📐 Infrastructure & Design 
+## 📐 Infrastructure Components & Design 
 
 The lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
 
@@ -152,7 +152,10 @@ Four Ansible roles are included in this project, located in the roles directory.
 - NGINX template: roles/lb/templates
 
 ### 🗃️ The inventory file
-To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed in the group_vars variables.  
+To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The Ansible credentials will be passed in the group_vars variables.  
+
+#### 🔡 Ansible Credentials
+- The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be baked into the container image, so ssh key pair generation is required before the container creation step. Please view detials steps in "How to run this lab" section below.
 
 ### 📕 The playbook
 The main playbook will execute the followings in order
@@ -161,8 +164,7 @@ The main playbook will execute the followings in order
 - deploy a nginx load balancer 
 - send an email notification about deployment status 
 
-### 🔡 Ansible Credentials
-- The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be baked into the container image, so ssh key pair generation is required before the container creation step. Please view detials steps in "How to run this lab" section below. 
+
 
 ---
 
