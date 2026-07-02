@@ -164,8 +164,6 @@ The main playbook will execute the followings in order
 - deploy a nginx load balancer 
 - send an email notification about deployment status 
 
-
-
 ---
 
 # ☝️ How To Run This Lab 🔬
@@ -179,6 +177,7 @@ Before running this lab, ensure the following tools are installed on your system
 - **Ansible** (version 2.10+)
 - **Git** (optional, for cloning the repository)
 - **Python 3** (for Ansible and local tooling)
+- **Email App Password** (to receive a notification once Ansible completes all tasks)
 
 You can verify installation with:
 ```
@@ -198,19 +197,19 @@ You should be able to run the playbook without including your SMTP info and the 
 Below is the recommended structure of this project: 
 ```
 ansible-lab/
-├── docker-compose.yml
-├── Dockerfile
-├── inventory.txt
-├── playbook.yml
-├── group_vars/
-│   └── all.yml
-├── keys
-|   └── ansbile_key
-|   └── ansible_key.pub
-├── roles/
-│   ├── mysql_db/
+├── docker-compose.yml       # Infrastructure definition
+├── Dockerfile              
+├── inventory.txt            # Defined managed nodes and groups
+├── playbook.yml             # Automation logic (tasks & workflows)
+├── group_vars/              # Centralized variable management
+│   └── all.yml              
+├── keys                     # SSH keys are used by Ansible to connect to the containers
+|   └── ansbile_key          
+|   └── ansible_key.pub       
+├── roles/                   # Modular, reusable configurations
+│   ├── mysql_db/            
 │   │   └── tasks/
-│   │       └── main.yml 
+│   │       └── main.yml    
 │   ├── webserver/
 │   │   ├── tasks/
 │   │   │   └── main.yml
@@ -222,9 +221,9 @@ ansible-lab/
 │   └── lb/
 │       ├── tasks/
 │       │   └── main.yml
-│       └── templates/
+│       └── templates/        # dynamic configuration files (Jinja2)
 │           └── nginx.conf.j2
-└── README.md
+└── README.md                 # Project documentation
 ```
 
 ## Running the lab.
