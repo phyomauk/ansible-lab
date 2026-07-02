@@ -309,6 +309,39 @@ If the database container is stopped and restarted, the MySQL service must be st
 ```
 mysqld_safe &
 ```
+## 🎯 What I Learned / Demonstrated
+
+This project reflects practical DevOps engineering skills beyond theoretical knowledge:
+
+### Technical Skills
+- Designing and implementing a multi-tier architecture
+- Writing idempotent Ansible playbooks
+- Managing infrastructure using declarative automation
+- Debugging service configurations (NGINX, MySQL)
+- Working with containerized environments
+
+### DevOps Practices
+- Infrastructure as Code (IaC)
+- Configuration management at scale
+- Automation-driven deployments
+- Reproducible environments
+
+### Problem-Solving Ability
+- Simulating production-like systems locally
+- Abstracting infrastructure complexity using Docker
+- Automating repetitive configuration tasks
+
+## 🔄 Future Improvements
+
+To further enhance this project and demonstrate advanced DevOps capabilities:
+
+- 🚀 Integrate CI/CD pipeline using GitHub Actions
+- ☸️ Extend architecture to Kubernetes-based deployment
+- 📊 Add monitoring and observability (Prometheus + Grafana)
+- 🔐 Implement secrets management (Ansible Vault / HashiCorp Vault)
+- 🧪 Add automated testing for playbooks (Molecule)
+- ☁️ Deploy to cloud infrastructure (AWS / Azure / GCP)
+- 📦 Introduce dynamic inventory (cloud-based or templated)
 
 Thank you for visting to my repo.<br /> 
 Author: Phyo Mauk<br />
