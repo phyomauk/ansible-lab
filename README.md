@@ -105,7 +105,7 @@ This project demonstrates hands-on experience with modern DevOps tooling and inf
 - ✅ Realistic simulation of production-style deployment workflows
 
 ## 🔁 Workflow (Automation Pipeline)
-
+```
 Code Repository
     ↓
 Ansible Controller
@@ -119,8 +119,10 @@ Deploy Web Servers
 Initialize MySQL Database
     ↓
 Validate End-to-End Connectivity
+```
 
-## 🧩 Details Explanation Of The Project Components 
+## 🧩 Detailed Explanation Of The Project Components 
+
 ### 📦 Container Creation
 All required infrastructure is provisioned using Docker.
 
@@ -152,15 +154,17 @@ Four Ansible roles are included in this project, located in the roles directory.
 ### 🗃️ The inventory file
 To simplify the lab, a static inventory file was chosen for implementation. The static IP address are assigned to containers and admin user is created during container creation. The required user name and ssh key for the Ansbile controller will be passed in the group_vars variables.  
 
-## 📕 The playbook
+### 📕 The playbook
 The main playbook will execute the followings in order
 - deploy a MySQL server
 - deploy two flask web app servers
 - deploy a nginx load balancer 
 - send an email notification about deployment status 
 
-## 🔡 Ansible Credentials
+### 🔡 Ansible Credentials
 - The ansible controller(host machine) will use user name and a private key to connect to the containers. The public key will be baked into the container image, so ssh key pair generation is required before the container creation step. Please view detials steps in "How to run this lab" section below. 
+
+---
 
 # ☝️ How To Run This Lab 🔬
 Runnning this lab on local system is recommended. It should also work on virtual machines or GitHub Codespace. 
@@ -222,7 +226,7 @@ ansible-lab/
 ```
 
 ## Running the lab.
-- Follow instruction below
+- Follow the instructions below
 
 ### 1. pull the repository <br />
 Example:  
@@ -304,34 +308,36 @@ When finsished, remove the containers:
 docker compose down
 ``` 
 
-### Note 
+#### 📌 Note 
 If the database container is stopped and restarted, the MySQL service must be started manually inside of the database container. There is no auto-start mechanism implemented for the MySQL service. The following command is the way to start the MySQL service.   
 ```
 mysqld_safe &
 ```
-## 🎯 What I Learned / Demonstrated
+---
+
+# 🎯 What I Learned / Demonstrated
 
 This project reflects practical DevOps engineering skills beyond theoretical knowledge:
 
-### Technical Skills
+## Technical Skills
 - Designing and implementing a multi-tier architecture
 - Writing idempotent Ansible playbooks
 - Managing infrastructure using declarative automation
 - Debugging service configurations (NGINX, MySQL)
 - Working with containerized environments
 
-### DevOps Practices
+## DevOps Practices
 - Infrastructure as Code (IaC)
 - Configuration management at scale
 - Automation-driven deployments
 - Reproducible environments
 
-### Problem-Solving Ability
+## Problem-Solving Ability
 - Simulating production-like systems locally
 - Abstracting infrastructure complexity using Docker
 - Automating repetitive configuration tasks
 
-## 🔄 Future Improvements
+# 🔄 Future Improvements
 
 To further enhance this project and demonstrate advanced DevOps capabilities:
 
@@ -342,6 +348,7 @@ To further enhance this project and demonstrate advanced DevOps capabilities:
 - 🧪 Add automated testing for playbooks (Molecule)
 - ☁️ Deploy to cloud infrastructure (AWS / Azure / GCP)
 - 📦 Introduce dynamic inventory (cloud-based or templated)
+---
 
 Thank you for visting to my repo.<br /> 
 Author: Phyo Mauk<br />
