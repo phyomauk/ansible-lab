@@ -324,18 +324,22 @@ localhost:8080
 ```
 The response: Welcome! Response from node01/node02
 
+---
+
 2. Test the web tier
 ```
 localhost:8080/how are you
 ```
 Response: I am good, how about you? Response from node01/node02
 
+---
+
 3. Test the conntion between the web and database layers
 ```
 localhost:8080/employees
 ```
 The response: {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"}
-
+---
 
 ### Removing Containers
 When finsished, remove the containers: 
