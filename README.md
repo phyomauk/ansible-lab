@@ -4,7 +4,7 @@
 This project demonstrates how **Infrastructure as Code (IaC)** and **configuration automation** can be used to provision and manage a complete **3-tier application stack** (Load Balancer, Web Servers, and Database) using Ansible and Docker.
 
 
-👉 Business Value:
+### 👉 Business Value:
 - Eliminates manual server configuration
 - Enables repeatable and consistent deployments
 - Reduces time-to-deploy and operational errors
@@ -63,7 +63,7 @@ flowchart LR
 
 ```
 
-## 📐 Infrastructure Components & Design 
+## 📐 Infrastructure Design 
 
 The lab environment consists of four Ubuntu-based containers, each operating as a lightweight virtual machine within an isolated containerized infrastructure. Two containers are configured as web servers, while the remaining containers provide MySQL database and load-balancing services. The host machine will be acting as Ansible controller. 
 
@@ -71,7 +71,23 @@ Ubuntu container images were intentionally selected instead of prebuilt MySQL or
 
 Containers were chosen to reduce system resource consumption, improve deployment speed, and enable rapid environment provisioning and teardown. The overall objective of this lab is to provide a practical demonstration of Ansible automation workflows and infrastructure-as-code concepts, rather than to build a production-grade application platform.
 
+## 🔁 Workflow (Automation Pipeline)
+```
+Code Repository
+    ↓
+Provision Docker Containers
+    ↓
+Ansible Controller
+    ↓
+Initialize MySQL Database
+    ↓
+Deploy Web Servers
+    ↓
+Configure NGINX (Load Balancer)
+    ↓
+Validate End-to-End Connectivity
 
+```
 ## 🧰 Tech Stack
 
 This project demonstrates hands-on experience with modern DevOps tooling and infrastructure automation practices.
@@ -103,23 +119,6 @@ This project demonstrates hands-on experience with modern DevOps tooling and inf
 - ✅ Idempotent execution ensures consistent system states
 - ✅ Separation of infrastructure (Docker) and configuration (Ansible)
 - ✅ Realistic simulation of production-style deployment workflows
-
-## 🔁 Workflow (Automation Pipeline)
-```
-Code Repository
-    ↓
-Ansible Controller
-    ↓
-Provision Docker Containers
-    ↓
-Configure NGINX (Load Balancer)
-    ↓
-Deploy Web Servers
-    ↓
-Initialize MySQL Database
-    ↓
-Validate End-to-End Connectivity
-```
 
 ## 🧩 Detailed Explanation Of The Project Components 
 
@@ -162,7 +161,42 @@ The main playbook will execute the followings in order
 - deploy a MySQL server
 - deploy two flask web app servers
 - deploy a nginx load balancer 
-- send an email notification about deployment status 
+- send an email notification about deployment status
+
+
+## 🎯 What I Learned / Demonstrated
+
+This project reflects practical DevOps engineering skills beyond theoretical knowledge:
+
+### Technical Skills
+- Designing and implementing a multi-tier architecture
+- Writing idempotent Ansible playbooks
+- Managing infrastructure using declarative automation
+- Debugging service configurations (NGINX, MySQL)
+- Working with containerized environments
+
+### DevOps Practices
+- Infrastructure as Code (IaC)
+- Configuration management at scale
+- Automation-driven deployments
+- Reproducible environments
+
+### Problem-Solving Ability
+- Simulating production-like systems locally
+- Abstracting infrastructure complexity using Docker
+- Automating repetitive configuration tasks
+
+# 🔄 Future Improvements
+
+To further enhance this project and demonstrate advanced DevOps capabilities:
+
+- 🚀 Integrate CI/CD pipeline using GitHub Actions
+- ☸️ Extend architecture to Kubernetes-based deployment
+- 📊 Add monitoring and observability (Prometheus + Grafana)
+- 🔐 Implement secrets management (Ansible Vault / HashiCorp Vault)
+- 🧪 Add automated testing for playbooks (Molecule)
+- ☁️ Deploy to cloud infrastructure (AWS / Azure / GCP)
+- 📦 Introduce dynamic inventory (cloud-based or templated)
 
 ---
 
@@ -226,7 +260,7 @@ ansible-lab/
 └── README.md                 # Project documentation
 ```
 
-## Running the lab.
+## Lab Instructions.
 - Follow the instructions below
 
 ### 1. pull the repository <br />
@@ -314,41 +348,6 @@ If the database container is stopped and restarted, the MySQL service must be st
 ```
 mysqld_safe &
 ```
----
-
-# 🎯 What I Learned / Demonstrated
-
-This project reflects practical DevOps engineering skills beyond theoretical knowledge:
-
-## Technical Skills
-- Designing and implementing a multi-tier architecture
-- Writing idempotent Ansible playbooks
-- Managing infrastructure using declarative automation
-- Debugging service configurations (NGINX, MySQL)
-- Working with containerized environments
-
-## DevOps Practices
-- Infrastructure as Code (IaC)
-- Configuration management at scale
-- Automation-driven deployments
-- Reproducible environments
-
-## Problem-Solving Ability
-- Simulating production-like systems locally
-- Abstracting infrastructure complexity using Docker
-- Automating repetitive configuration tasks
-
-# 🔄 Future Improvements
-
-To further enhance this project and demonstrate advanced DevOps capabilities:
-
-- 🚀 Integrate CI/CD pipeline using GitHub Actions
-- ☸️ Extend architecture to Kubernetes-based deployment
-- 📊 Add monitoring and observability (Prometheus + Grafana)
-- 🔐 Implement secrets management (Ansible Vault / HashiCorp Vault)
-- 🧪 Add automated testing for playbooks (Molecule)
-- ☁️ Deploy to cloud infrastructure (AWS / Azure / GCP)
-- 📦 Introduce dynamic inventory (cloud-based or templated)
 ---
 
 Thank you for visting to my repo.<br /> 
