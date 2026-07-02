@@ -314,27 +314,27 @@ ansible-playbook -i inventory.txt playbook.yaml
 ``` 
 Ansible will configure the web servers, the database, and the load balancer on their respective containers.  
 
-### Testing the App
+### 6. Testing the App
 Once the app is up and running, verify that the Flask web app is responding and able to query the database.
 
-Open your browser and navigate to:<br />
-1. 
+1. Open your browser and navigate to:<br />
+
 ```
 localhost:8080
 ```
-Response: Welcome! Response from node01/node02
+The response: Welcome! Response from node01/node02
 
-2. 
+2. Test the web tier
 ```
 localhost:8080/how are you
 ```
 Response: I am good, how about you? Response from node01/node02
 
-3. 
+3. Test the conntion between the web and database layers
 ```
 localhost:8080/employees
 ```
-Response: {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"}
+The response: {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"}
 
 
 ### Removing Containers
