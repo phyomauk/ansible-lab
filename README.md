@@ -322,8 +322,8 @@ Once the app is up and running, verify that the Flask web app is responding and 
 ```
 localhost:8080
 ```
-The expected output should be:
-“Welcome! Response from node01” or “Welcome! Response from node02”.
+The expected output should be:</br>
+“Welcome! Response from node01” or “Welcome! Response from node02”. </br>
 Refresh the browser repeatedly to validate that traffic is being distributed across both nodes (node01 and node02), demonstrating load balancing behavior.
 
 ---
@@ -340,7 +340,7 @@ The response: I am good, how about you? Response from node01/node02
 ```
 localhost:8080/employees
 ```
-The expected output should be:</br> {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"} or  {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node02"}
+The expected output should be:</br> {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node01"} or </br>  {"data":[{"id":1,"name":"Alice","position":"Engineer","salary":90000}],"served_by":"node02"}
 
 ---
 
